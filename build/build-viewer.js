@@ -9,9 +9,9 @@ import {rollup} from 'rollup';
 import * as rollupPlugins from './rollup-plugins.js';
 import {GhPagesApp} from './gh-pages-app.js';
 import {LH_ROOT} from '../root.js';
-import {createCommonjsRefs} from '../lighthouse-core/scripts/esm-utils.js';
+import {createRequire} from '../lighthouse-core/scripts/esm-utils.js';
 
-const {require} = createCommonjsRefs(import.meta);
+const require = createRequire(import.meta);
 
 async function buildReportGenerator() {
   const bundle = await rollup({

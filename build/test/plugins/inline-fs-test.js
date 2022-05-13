@@ -9,9 +9,9 @@ import path from 'path';
 
 import {inlineFs} from '../../plugins/inline-fs.js';
 import {LH_ROOT} from '../../../root.js';
-import {createCommonjsRefs} from '../../../lighthouse-core/scripts/esm-utils.js';
+import {createRequire} from '../../../lighthouse-core/scripts/esm-utils.js';
 
-const {require} = createCommonjsRefs(import.meta);
+const require = createRequire(import.meta);
 
 const filepath = `${LH_ROOT}/lighthouse-core/index.js`;
 

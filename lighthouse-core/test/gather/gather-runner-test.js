@@ -25,9 +25,9 @@ import {
   fnAny,
 } from '../test-utils.js';
 import fakeDriver from './fake-driver.js';
-import {createCommonjsRefs} from '../../scripts/esm-utils.js';
+import {createRequire} from '../../scripts/esm-utils.js';
 
-const {require} = createCommonjsRefs(import.meta);
+const require = createRequire(import.meta);
 
 /**
  * Same as jest.requireMock(), but uses `any` instead of `unknown`.

@@ -16,9 +16,11 @@ import Gatherer from '../../gather/gatherers/gatherer.js';
 import Audit from '../../audits/audit.js';
 import i18n from '../../lib/i18n/i18n.js';
 import format from '../../../shared/localization/format.js';
-import {createCommonjsRefs} from '../../scripts/esm-utils.js';
+import {createRequire, getModuleDirectory, getModuleName} from '../../scripts/esm-utils.js';
 
-const {require, __filename, __dirname} = createCommonjsRefs(import.meta);
+const require = createRequire(import.meta);
+const moduleName = getModuleName(import.meta);
+const moduleDirectory = getModuleDirectory(import.meta);
 
 describe('Config', () => {
   let origConfig;
@@ -367,7 +369,7 @@ describe('Config', () => {
   });
 
   it('loads an audit relative to a config path', () => {
-    const configPath = __filename;
+    const configPath = moduleName;
 
     return assert.doesNotThrow(_ => new Config({
       audits: ['../fixtures/valid-custom-audit'],
@@ -387,7 +389,7 @@ describe('Config', () => {
   it('loads an audit relative to the working directory', () => {
     // Construct an audit URL relative to current working directory, regardless
     // of where test was started from.
-    const absoluteAuditPath = path.resolve(__dirname, '../fixtures/valid-custom-audit');
+    const absoluteAuditPath = path.resolve(moduleDirectory, '../fixtures/valid-custom-audit');
     assert.doesNotThrow(_ => require.resolve(absoluteAuditPath));
     const relativePath = path.relative(process.cwd(), absoluteAuditPath);
 
@@ -398,7 +400,7 @@ describe('Config', () => {
 
   it('throws but not for missing audit when audit has a dependency error', () => {
     return assert.throws(_ => new Config({
-      audits: [path.resolve(__dirname, '../fixtures/invalid-audits/require-error.js')],
+      audits: [path.resolve(moduleDirectory, '../fixtures/invalid-audits/require-error.js')],
     }), function(err) {
       // We're expecting not to find parent class Audit, so only reject on our
       // own custom locate audit error, not the usual MODULE_NOT_FOUND.
@@ -407,7 +409,7 @@ describe('Config', () => {
   });
 
   it('throws when it finds invalid audits', () => {
-    const basePath = path.resolve(__dirname, '../fixtures/invalid-audits');
+    const basePath = path.resolve(moduleDirectory, '../fixtures/invalid-audits');
     assert.throws(_ => new Config({
       audits: [basePath + '/missing-audit'],
     }), /audit\(\) method/);
@@ -961,7 +963,7 @@ describe('Config', () => {
 
   describe('mergePlugins', () => {
     // Include a configPath flag so that config.js looks for the plugins in the fixtures dir.
-    const configFixturePath = __dirname + '/../fixtures/config-plugins/';
+    const configFixturePath = moduleDirectory + '/../fixtures/config-plugins/';
 
     it('should append audits', () => {
       const configJson = {
@@ -1333,7 +1335,7 @@ describe('Config', () => {
     });
 
     it('loads gatherers from custom paths', () => {
-      const customPath = path.resolve(__dirname, '../fixtures/valid-custom-gatherer');
+      const customPath = path.resolve(moduleDirectory, '../fixtures/valid-custom-gatherer');
       const gatherer = loadGatherer(customPath);
       assert.equal(gatherer.instance.name, 'CustomGatherer');
       assert.equal(typeof gatherer.instance.beforePass, 'function');
@@ -1342,7 +1344,7 @@ describe('Config', () => {
     it('loads a gatherer relative to a config path', () => {
       const config = new Config({
         passes: [{gatherers: ['../fixtures/valid-custom-gatherer']}],
-      }, {configPath: __filename});
+      }, {configPath: moduleName});
       const gatherer = config.passes[0].gatherers[0];
 
       assert.equal(gatherer.instance.name, 'CustomGatherer');
@@ -1385,7 +1387,8 @@ describe('Config', () => {
     it('loads a gatherer relative to the working directory', () => {
       // Construct a gatherer URL relative to current working directory,
       // regardless of where test was started from.
-      const absoluteGathererPath = path.resolve(__dirname, '../fixtures/valid-custom-gatherer');
+      const absoluteGathererPath =
+        path.resolve(moduleDirectory, '../fixtures/valid-custom-gatherer');
       assert.doesNotThrow(_ => require.resolve(absoluteGathererPath));
       const relativeGathererPath = path.relative(process.cwd(), absoluteGathererPath);
 
@@ -1395,7 +1398,8 @@ describe('Config', () => {
     });
 
     it('throws but not for missing gatherer when it has a dependency error', () => {
-      const gathererPath = path.resolve(__dirname, '../fixtures/invalid-gatherers/require-error');
+      const gathererPath =
+        path.resolve(moduleDirectory, '../fixtures/invalid-gatherers/require-error');
       return assert.throws(_ => loadGatherer(gathererPath),
           function(err) {
             // We're expecting not to find parent class Gatherer, so only reject on
@@ -1411,7 +1415,7 @@ describe('Config', () => {
     });
 
     it('throws for invalid gatherers', () => {
-      const root = path.resolve(__dirname, '../fixtures/invalid-gatherers');
+      const root = path.resolve(moduleDirectory, '../fixtures/invalid-gatherers');
 
       assert.throws(_ => loadGatherer(`${root}/missing-before-pass`),
         /beforePass\(\) method/);

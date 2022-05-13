@@ -10,14 +10,14 @@ import {jest} from '@jest/globals';
 import log from 'lighthouse-logger';
 
 import i18n from '../../../lib/i18n/i18n.js';
-import {createCommonjsRefs} from '../../../scripts/esm-utils.js';
+import {getModuleDirectory} from '../../../scripts/esm-utils.js';
 
-const {__dirname} = createCommonjsRefs(import.meta);
+const moduleDirectory = getModuleDirectory(import.meta);
 
 describe('i18n', () => {
   describe('#createMessageInstanceIdFn', () => {
     it('returns an IcuMessage reference', () => {
-      const fakeFile = path.join(__dirname, 'fake-file.js');
+      const fakeFile = path.join(moduleDirectory, 'fake-file.js');
       const templates = {daString: 'use {x} me!'};
       const formatter = i18n.createMessageInstanceIdFn(fakeFile, templates);
 

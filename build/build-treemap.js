@@ -9,9 +9,9 @@ import {LH_ROOT} from '../root.js';
 import {getIcuMessageIdParts} from '../shared/localization/format.js';
 import locales from '../shared/localization/locales.js';
 import {UIStrings} from '../treemap/app/src/util.js';
-import {createCommonjsRefs} from '../lighthouse-core/scripts/esm-utils.js';
+import {createRequire} from '../lighthouse-core/scripts/esm-utils.js';
 
-const {require} = createCommonjsRefs(import.meta);
+const require = createRequire(import.meta);
 
 /**
  * Extract only the strings needed for treemap into

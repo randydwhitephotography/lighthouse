@@ -9,9 +9,9 @@ import {strict as assert} from 'assert';
 
 import {computeCSSTokenLength, computeJSTokenLength} from '../../lib/minification-estimator.js'; // eslint-disable-line max-len
 import {LH_ROOT} from '../../../root.js';
-import {createCommonjsRefs} from '../../scripts/esm-utils.js';
+import {createRequire} from '../../scripts/esm-utils.js';
 
-const {require} = createCommonjsRefs(import.meta);
+const require = createRequire(import.meta);
 
 const angularJs = fs.readFileSync(require.resolve('angular/angular.js'), 'utf8');
 const courseheroFilename =

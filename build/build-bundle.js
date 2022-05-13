@@ -21,9 +21,9 @@ import PubAdsPlugin from 'lighthouse-plugin-publisher-ads/plugin.js';
 import * as rollupPlugins from './rollup-plugins.js';
 import Runner from '../lighthouse-core/runner.js';
 import {LH_ROOT, readJson} from '../root.js';
-import {createCommonjsRefs} from '../lighthouse-core/scripts/esm-utils.js';
+import {createRequire} from '../lighthouse-core/scripts/esm-utils.js';
 
-const {require} = createCommonjsRefs(import.meta);
+const require = createRequire(import.meta);
 
 /** The commit hash for the current HEAD. */
 const COMMIT_HASH = execSync('git rev-parse HEAD').toString().trim();

@@ -9,11 +9,11 @@ import fs from 'fs';
 import {jest} from '@jest/globals';
 
 import {LH_ROOT} from '../../root.js';
-import {createCommonjsRefs} from '../scripts/esm-utils.js';
 import * as mockCommands from './gather/mock-commands.js';
 import NetworkRecorder from '../lib/network-recorder.js';
+import {createRequire} from '../scripts/esm-utils.js';
 
-const {require} = createCommonjsRefs(import.meta);
+const require = createRequire(import.meta);
 
 /**
  * Some tests use the result of a LHR processed by our proto serialization.

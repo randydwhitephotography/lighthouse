@@ -14,11 +14,11 @@ import traceEvents from '../fixtures/traces/progressive-app.json';
 import dbwTrace from '../results/artifacts/defaultPass.trace.json';
 import dbwResults from '../results/sample_v2.json';
 import Audit from '../../audits/audit.js';
-import {createCommonjsRefs} from '../../scripts/esm-utils.js';
+import {getModuleDirectory} from '../../scripts/esm-utils.js';
 import fullTraceObj from '../fixtures/traces/progressive-app-m60.json';
 import devtoolsLog from '../fixtures/traces/progressive-app-m60.devtools.log.json';
 
-const {__dirname} = createCommonjsRefs(import.meta);
+const moduleDirectory = getModuleDirectory(import.meta);
 
 // deepStrictEqual can hang on a full trace, we assert trace same-ness like so
 function assertTraceEventsEqual(traceEventsA, traceEventsB) {
@@ -214,7 +214,7 @@ describe('asset-saver helper', () => {
 
   describe('loadArtifacts', () => {
     it('loads artifacts from disk', async () => {
-      const artifactsPath = __dirname + '/../fixtures/artifacts/perflog/';
+      const artifactsPath = moduleDirectory + '/../fixtures/artifacts/perflog/';
       const artifacts = await assetSaver.loadArtifacts(artifactsPath);
       assert.strictEqual(artifacts.LighthouseRunWarnings.length, 2);
       assert.strictEqual(artifacts.URL.requestedUrl, 'https://www.reddit.com/r/nba');
@@ -224,14 +224,14 @@ describe('asset-saver helper', () => {
   });
 
   describe('JSON serialization', () => {
-    const outputPath = __dirname + '/json-serialization-test-data/';
+    const outputPath = moduleDirectory + '/json-serialization-test-data/';
 
     afterEach(() => {
       fs.rmSync(outputPath, {recursive: true, force: true});
     });
 
     it('round trips saved artifacts', async () => {
-      const artifactsPath = __dirname + '/../results/artifacts/';
+      const artifactsPath = moduleDirectory + '/../results/artifacts/';
       const originalArtifacts = await assetSaver.loadArtifacts(artifactsPath);
 
       await assetSaver.saveArtifacts(originalArtifacts, outputPath);
@@ -248,7 +248,7 @@ describe('asset-saver helper', () => {
       const existingDevtoolslogPath = `${outputPath}/bestPass.devtoolslog.json`;
       fs.writeFileSync(existingDevtoolslogPath, '[]');
 
-      const artifactsPath = __dirname + '/../results/artifacts/';
+      const artifactsPath = moduleDirectory + '/../results/artifacts/';
       const originalArtifacts = await assetSaver.loadArtifacts(artifactsPath);
 
       await assetSaver.saveArtifacts(originalArtifacts, outputPath);

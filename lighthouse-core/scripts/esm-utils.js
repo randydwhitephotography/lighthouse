@@ -8,27 +8,38 @@ import module from 'module';
 import url from 'url';
 import path from 'path';
 
-const require = module.createRequire(import.meta.url);
-
 /**
  * Commonjs equivalent of `require.resolve`.
  * @param {string} packageName
  */
 function resolveModulePath(packageName) {
-  return require.resolve(packageName);
+  return createRequire(import.meta).resolve(packageName);
 }
 
 /**
  * @param {ImportMeta} importMeta
  */
-function createCommonjsRefs(importMeta) {
-  const require = module.createRequire(importMeta.url);
-  const filename = url.fileURLToPath(importMeta.url);
-  const dirname = path.dirname(filename);
-  return {require, __filename: filename, __dirname: dirname};
+function createRequire(importMeta) {
+  return module.createRequire(importMeta.url);
+}
+
+/**
+ * @param {ImportMeta} importMeta
+ */
+function getModuleName(importMeta) {
+  return url.fileURLToPath(importMeta.url);
+}
+
+/**
+ * @param {ImportMeta} importMeta
+ */
+function getModuleDirectory(importMeta) {
+  return path.dirname(getModuleName(importMeta));
 }
 
 export {
   resolveModulePath,
-  createCommonjsRefs,
+  createRequire,
+  getModuleName,
+  getModuleDirectory,
 };
