@@ -6,6 +6,7 @@
 
 import {strict as assert} from 'assert';
 import path from 'path';
+import {createRequire} from 'module';
 
 import log from 'lighthouse-logger';
 
@@ -16,9 +17,9 @@ import Gatherer from '../../gather/gatherers/gatherer.js';
 import Audit from '../../audits/audit.js';
 import i18n from '../../lib/i18n/i18n.js';
 import format from '../../../shared/localization/format.js';
-import {createRequire, getModuleDirectory, getModuleName} from '../../../esm-utils.mjs';
+import {getModuleDirectory, getModuleName} from '../../../esm-utils.mjs';
 
-const require = createRequire(import.meta);
+const require = createRequire(import.meta.url);
 const moduleName = getModuleName(import.meta);
 const moduleDir = getModuleDirectory(import.meta);
 

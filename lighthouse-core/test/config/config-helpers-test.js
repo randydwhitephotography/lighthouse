@@ -5,6 +5,7 @@
  */
 
 import path from 'path';
+import {createRequire} from 'module';
 
 import {jest} from '@jest/globals';
 
@@ -24,9 +25,9 @@ import Gatherer from '../../gather/gatherers/gatherer.js';
 import ImageElementsGatherer from '../../gather/gatherers/image-elements.js';
 import UserTimingsAudit from '../../audits/user-timings.js';
 import {LH_ROOT} from '../../../root.js';
-import {createRequire, getModuleDirectory} from '../../../esm-utils.mjs';
+import {getModuleDirectory} from '../../../esm-utils.mjs';
 
-const require = createRequire(import.meta);
+const require = createRequire(import.meta.url);
 const moduleDir = getModuleDirectory(import.meta);
 
 jest.mock('process', () => ({

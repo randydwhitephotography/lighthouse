@@ -7,6 +7,7 @@
 import fs from 'fs';
 import {strict as assert} from 'assert';
 import path from 'path';
+import {createRequire} from 'module';
 
 import {jest} from '@jest/globals';
 
@@ -20,9 +21,9 @@ import assetSaver from '../lib/asset-saver.js';
 import LHError from '../lib/lh-error.js';
 import i18n from '../lib/i18n/i18n.js';
 import {makeMocksForGatherRunner} from './test-utils.js';
-import {createRequire, getModuleDirectory, getModuleName} from '../../esm-utils.mjs';
+import {getModuleDirectory, getModuleName} from '../../esm-utils.mjs';
 
-const require = createRequire(import.meta);
+const require = createRequire(import.meta.url);
 const moduleName = getModuleName(import.meta);
 const moduleDir = getModuleDirectory(import.meta);
 
