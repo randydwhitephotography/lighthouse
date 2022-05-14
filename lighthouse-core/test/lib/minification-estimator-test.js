@@ -9,7 +9,7 @@ import {strict as assert} from 'assert';
 
 import {computeCSSTokenLength, computeJSTokenLength} from '../../lib/minification-estimator.js'; // eslint-disable-line max-len
 import {LH_ROOT} from '../../../root.js';
-import {createRequire} from '../../scripts/esm-utils.js';
+import {createRequire} from '../../../../esm-utils.mjs';
 
 const require = createRequire(import.meta);
 
