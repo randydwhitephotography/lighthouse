@@ -24,7 +24,7 @@ import Gatherer from '../../gather/gatherers/gatherer.js';
 import ImageElementsGatherer from '../../gather/gatherers/image-elements.js';
 import UserTimingsAudit from '../../audits/user-timings.js';
 import {LH_ROOT} from '../../../root.js';
-import {createRequire, getModuleDirectory} from '../../scripts/esm-utils.js';
+import {createRequire, getModuleDirectory} from '../../../esm-utils.mjs';
 
 const require = createRequire(import.meta);
 const moduleDir = getModuleDirectory(import.meta);

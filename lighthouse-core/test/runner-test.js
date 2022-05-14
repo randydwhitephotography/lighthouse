@@ -20,7 +20,7 @@ import assetSaver from '../lib/asset-saver.js';
 import LHError from '../lib/lh-error.js';
 import i18n from '../lib/i18n/i18n.js';
 import {makeMocksForGatherRunner} from './test-utils.js';
-import {createRequire, getModuleDirectory, getModuleName} from '../scripts/esm-utils.js';
+import {createRequire, getModuleDirectory, getModuleName} from '../../esm-utils.mjs';
 
 const require = createRequire(import.meta);
 const moduleName = getModuleName(import.meta);

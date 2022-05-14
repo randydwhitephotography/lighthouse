@@ -16,7 +16,7 @@ import Gatherer from '../../gather/gatherers/gatherer.js';
 import Audit from '../../audits/audit.js';
 import i18n from '../../lib/i18n/i18n.js';
 import format from '../../../shared/localization/format.js';
-import {createRequire, getModuleDirectory, getModuleName} from '../../scripts/esm-utils.js';
+import {createRequire, getModuleDirectory, getModuleName} from '../../../esm-utils.mjs';
 
 const require = createRequire(import.meta);
 const moduleName = getModuleName(import.meta);

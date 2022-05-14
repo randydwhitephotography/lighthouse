@@ -9,7 +9,7 @@ import path from 'path';
 
 import {inlineFs} from '../../plugins/inline-fs.js';
 import {LH_ROOT} from '../../../root.js';
-import {createRequire} from '../../../lighthouse-core/scripts/esm-utils.js';
+import {createRequire} from '../../../esm-utils.mjs';
 
 const require = createRequire(import.meta);
 

@@ -25,7 +25,7 @@ import {
   fnAny,
 } from '../test-utils.js';
 import fakeDriver from './fake-driver.js';
-import {createRequire} from '../../scripts/esm-utils.js';
+import {createRequire} from '../../../esm-utils.mjs';
 
 const require = createRequire(import.meta);
 

@@ -11,7 +11,7 @@ import {jest} from '@jest/globals';
 import {LH_ROOT} from '../../root.js';
 import * as mockCommands from './gather/mock-commands.js';
 import NetworkRecorder from '../lib/network-recorder.js';
-import {createRequire} from '../scripts/esm-utils.js';
+import {createRequire} from '../../esm-utils.mjs';
 
 const require = createRequire(import.meta);
 
