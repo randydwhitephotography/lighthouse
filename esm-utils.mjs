@@ -15,14 +15,8 @@ import path from 'path';
  * @param {string} packageName
  */
 function resolveModulePath(packageName) {
-  return createRequire(import.meta).resolve(packageName);
-}
-
-/**
- * @param {ImportMeta} importMeta
- */
-function createRequire(importMeta) {
-  return module.createRequire(importMeta.url);
+  const require = module.createRequire(import.meta.url);
+  return require.resolve(packageName);
 }
 
 /**
@@ -41,7 +35,6 @@ function getModuleDirectory(importMeta) {
 
 export {
   resolveModulePath,
-  createRequire,
   getModuleName,
   getModuleDirectory,
 };
