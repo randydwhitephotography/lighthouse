@@ -12,12 +12,12 @@ import log from 'lighthouse-logger';
 import i18n from '../../../lib/i18n/i18n.js';
 import {getModuleDirectory} from '../../../../esm-utils.mjs';
 
-const moduleDirectory = getModuleDirectory(import.meta);
+const moduleDir = getModuleDirectory(import.meta);
 
 describe('i18n', () => {
   describe('#createMessageInstanceIdFn', () => {
     it('returns an IcuMessage reference', () => {
-      const fakeFile = path.join(moduleDirectory, 'fake-file.js');
+      const fakeFile = path.join(moduleDir, 'fake-file.js');
       const templates = {daString: 'use {x} me!'};
       const formatter = i18n.createMessageInstanceIdFn(fakeFile, templates);
 
