@@ -22,7 +22,7 @@ function resolveModulePath(packageName) {
 /**
  * @param {ImportMeta} importMeta
  */
-function getModuleName(importMeta) {
+function getModulePath(importMeta) {
   return url.fileURLToPath(importMeta.url);
 }
 
@@ -30,11 +30,11 @@ function getModuleName(importMeta) {
  * @param {ImportMeta} importMeta
  */
 function getModuleDirectory(importMeta) {
-  return path.dirname(getModuleName(importMeta));
+  return path.dirname(getModulePath(importMeta));
 }
 
 export {
   resolveModulePath,
-  getModuleName,
+  getModulePath,
   getModuleDirectory,
 };

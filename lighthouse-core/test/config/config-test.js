@@ -17,10 +17,10 @@ import Gatherer from '../../gather/gatherers/gatherer.js';
 import Audit from '../../audits/audit.js';
 import i18n from '../../lib/i18n/i18n.js';
 import format from '../../../shared/localization/format.js';
-import {getModuleDirectory, getModuleName} from '../../../esm-utils.mjs';
+import {getModuleDirectory, getModulePath} from '../../../esm-utils.mjs';
 
 const require = createRequire(import.meta.url);
-const moduleName = getModuleName(import.meta);
+const modulePath = getModulePath(import.meta);
 const moduleDir = getModuleDirectory(import.meta);
 
 describe('Config', () => {
@@ -370,7 +370,7 @@ describe('Config', () => {
   });
 
   it('loads an audit relative to a config path', () => {
-    const configPath = moduleName;
+    const configPath = modulePath;
 
     return assert.doesNotThrow(_ => new Config({
       audits: ['../fixtures/valid-custom-audit'],
@@ -1345,7 +1345,7 @@ describe('Config', () => {
     it('loads a gatherer relative to a config path', () => {
       const config = new Config({
         passes: [{gatherers: ['../fixtures/valid-custom-gatherer']}],
-      }, {configPath: moduleName});
+      }, {configPath: modulePath});
       const gatherer = config.passes[0].gatherers[0];
 
       assert.equal(gatherer.instance.name, 'CustomGatherer');

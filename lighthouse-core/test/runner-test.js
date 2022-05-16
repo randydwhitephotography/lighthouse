@@ -21,10 +21,10 @@ import assetSaver from '../lib/asset-saver.js';
 import LHError from '../lib/lh-error.js';
 import i18n from '../lib/i18n/i18n.js';
 import {makeMocksForGatherRunner} from './test-utils.js';
-import {getModuleDirectory, getModuleName} from '../../esm-utils.mjs';
+import {getModuleDirectory, getModulePath} from '../../esm-utils.mjs';
 
 const require = createRequire(import.meta.url);
-const moduleName = getModuleName(import.meta);
+const modulePath = getModulePath(import.meta);
 const moduleDir = getModuleDirectory(import.meta);
 
 // Some imports needs to be done dynamically, so that their dependencies will be mocked.
@@ -201,7 +201,7 @@ describe('Runner', () => {
     it('serializes IcuMessages in gatherMode and is able to use them in auditMode', async () => {
       // Can use this to access shared UIStrings in i18n.js.
       // For future changes: exact messages aren't important, just choose ones with replacements.
-      const str_ = i18n.createMessageInstanceIdFn(moduleName, {});
+      const str_ = i18n.createMessageInstanceIdFn(modulePath, {});
 
       // A gatherer that produces an IcuMessage runWarning and LighthouseError artifact.
       class WarningAndErrorGatherer extends Gatherer {
