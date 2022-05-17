@@ -2,7 +2,7 @@
 
 _Some incomplete notes_
 
-![Lighthouse Architecture](https://user-images.githubusercontent.com/6752989/168889384-68605929-35ae-4f73-be82-531e55e2ebab.png)
+![Lighthouse Architecture](https://user-images.githubusercontent.com/6752989/168922741-d574b82c-656c-446a-bc81-43a578c75c06.png)
 
 ## Components & Terminology
 
