@@ -10,16 +10,10 @@ import {act, render} from '@testing-library/preact';
 
 import {FlowResultContext, OptionsContext} from '../src/util';
 import {I18nProvider} from '../src/i18n/i18n';
+import {Topbar, saveHtml} from '../src/topbar';
 
 const mockSaveFile = jest.fn();
-jest.unstable_mockModule('../../../report/renderer/api.js', () => ({
-  saveFile: mockSaveFile,
-}));
-
-let Topbar: typeof import('../src/topbar').Topbar;
-beforeAll(async () => {
-  Topbar = (await import('../src/topbar')).Topbar;
-});
+const defaultSaveFile = saveHtml.saveFile;
 
 const flowResult = {
   name: 'User flow',
@@ -34,6 +28,7 @@ let wrapper: FunctionComponent;
 let options: LH.FlowReportOptions;
 
 beforeEach(() => {
+  saveHtml.saveFile = defaultSaveFile;
   mockSaveFile.mockReset();
   options = {};
   wrapper = ({children}) => (
@@ -48,6 +43,7 @@ beforeEach(() => {
 });
 
 it('save button opens save dialog for HTML file', async () => {
+  saveHtml.saveFile = mockSaveFile;
   options = {getReportHtml: () => '<html></html>'};
   const root = render(<Topbar onMenuClick={() => {}}/>, {wrapper});
 
