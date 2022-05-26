@@ -28,7 +28,6 @@ let wrapper: FunctionComponent;
 let options: LH.FlowReportOptions;
 
 beforeEach(() => {
-  saveHtml.saveFile = defaultSaveFile;
   mockSaveFile.mockReset();
   options = {};
   wrapper = ({children}) => (
@@ -40,6 +39,10 @@ beforeEach(() => {
       </FlowResultContext.Provider>
     </OptionsContext.Provider>
   );
+});
+
+afterEach(() => {
+  saveHtml.saveFile = defaultSaveFile;
 });
 
 it('save button opens save dialog for HTML file', async () => {
