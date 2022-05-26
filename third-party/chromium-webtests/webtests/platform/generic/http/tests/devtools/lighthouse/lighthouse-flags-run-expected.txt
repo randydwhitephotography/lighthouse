@@ -10,13 +10,13 @@ Tests that lighthouse panel passes flags.
 [ ] Publisher Ads
 [x] Legacy navigation
 [x] Clear storage
-[ ] Simulated throttling
+Throttling method: devtools
 Analyze page load: enabled visible
 
 =============== Lighthouse Results ===============
 formFactor: desktop
 disableStorageReset: false
-throttlingMethod: devtools
+throttlingMethod: simulated
 
 View Trace Button Text: "View Trace"
 View Trace Button Title: ""
