@@ -16,7 +16,7 @@
     "express": "^4.16.4",
     "isomorphic-fetch": "^2.2.1",
     "morgan": "^1.9.1",
-    "sequelize": "^4.42.0",
+    "sequelize": "^6.29.0",
     "uuid": "^3.3.2",
     "yargs": "^12.0.5"
   },
